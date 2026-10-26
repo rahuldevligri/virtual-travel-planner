@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Virtual Travel Planner - Car Rental Website
 
 A responsive, professional business website for a premier car rental service located in **Durgapura, Jaipur, Rajasthan**. Built using pure Core PHP, MySQL, HTML5, modern vanilla CSS3, and vanilla JavaScript without external framework dependencies.
@@ -131,3 +132,33 @@ http://localhost/virtual-travel-planner/tests/test_quote_submission.php
    - Database credentials reside strictly in `.env`.
 4. **Mobile-First Responsive Design:**
    - Pure vanilla CSS3 utilizing flexbox and CSS grid with smooth breakpoints for mobile, tablet, and desktop viewports.
+=======
+# Virtual Travel Planner 🚗
+
+A modern, responsive car rental website built using Core PHP, MySQL, and AI Harness (Gemini CLI). 
+
+## 🚀 Features
+- **Fully Responsive UI**: Looks perfect on Mobile, Tablet, and Desktop.
+- **Dynamic Services**: Cleanly structured arrays for Local, Outstation, Airport, and Corporate rentals.
+- **Secure Enquiry Form**: Built with PDO and Prepared Statements to prevent SQL Injection.
+- **Database Integration**: Stores customer quote requests securely in MySQL.
+- **Clean Architecture**: Follows PRG (Post-Redirect-Get) pattern and includes a `.env` setup for credentials.
+
+## 🛠️ Tech Stack
+- **Backend:** PHP (Core)
+- **Database:** MySQL (PDO)
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript
+- **AI Tool Used:** Gemini CLI (for AI Harness assisted coding)
+
+## 📸 Screenshots
+![Home Page Preview](preview.png)
+*(Note: Make sure you have a `preview.png` file in your root folder)*
+
+## ⚙️ How to Run Locally
+1. Clone this repository inside your XAMPP `htdocs/Projects` folder.
+2. Start Apache and MySQL in XAMPP.
+3. Create a database named `virtual_travel_planner` in phpMyAdmin.
+4. Import the `sql/schema.sql` file.
+5. Rename `.env.example` to `.env` and update your database credentials.
+6. Open `http://localhost/Projects/virtual-travel-planner/` in your browser.
+>>>>>>> d7632849af8eda0bd7340d570f9cae06d3074f8d
