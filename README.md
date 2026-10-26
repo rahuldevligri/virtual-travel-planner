@@ -1,164 +1,150 @@
-<<<<<<< HEAD
-# Virtual Travel Planner - Car Rental Website
+# Virtual Travel Planner — Car Rental Website
 
-A responsive, professional business website for a premier car rental service located in **Durgapura, Jaipur, Rajasthan**. Built using pure Core PHP, MySQL, HTML5, modern vanilla CSS3, and vanilla JavaScript without external framework dependencies.
+A responsive car-rental website for **Durgapura, Jaipur, Rajasthan**, built with Core PHP, MySQL, HTML5, CSS3, and vanilla JavaScript. It presents local rentals, outstation trips, airport and railway transfers, corporate travel, and a quote-request workflow.
 
----
+## Screenshots
+
+The screenshots below show the current UI across the main pages.
+
+<details open>
+<summary><strong>Home page</strong></summary>
+<br>
+<img src="assets/images/virtual-travel-planner-home.png" alt="Virtual Travel Planner home page" width="100%">
+</details>
+
+<details>
+<summary><strong>About page</strong></summary>
+<br>
+<img src="assets/images/virtual-travel-planner-about.png" alt="About Virtual Travel Planner and vehicle fleet" width="100%">
+</details>
+
+<details>
+<summary><strong>Services page</strong></summary>
+<br>
+<img src="assets/images/virtual-travel-planner-services.png" alt="Virtual Travel Planner car rental services" width="100%">
+</details>
+
+<details>
+<summary><strong>Contact and quote request page</strong></summary>
+<br>
+<img src="assets/images/virtual-travel-planner-contact.png" alt="Car rental quote form and contact information" width="100%">
+</details>
+
+## Features
+
+- Responsive layout for desktop, tablet, and mobile.
+- Separate pages for local rentals, outstation trips, airport/railway transfers, corporate rentals, and enquiries.
+- Quote request form with server-side validation and user feedback.
+- PDO prepared statements for database operations.
+- Post-Redirect-Get (PRG) pattern to help prevent duplicate form submissions.
+- Environment-based database settings loaded from `.env`.
+- Automated test runner for quote submission validation and database handling.
+- Vanilla CSS and JavaScript; no frontend framework required.
 
 ## Tech Stack
-- **Backend:** Core PHP (Procedural / Modular functions, PDO, Prepared Statements)
-- **Database:** MySQL / MariaDB (InnoDB, UTF-8 mb4)
-- **Frontend:** HTML5, Modern CSS3 (Flexbox & CSS Grid, Mobile-First), Vanilla JavaScript
-- **Local Environment:** XAMPP, WAMP, LAMP, or built-in PHP development server
 
----
+- **Backend:** Core PHP
+- **Database:** MySQL / MariaDB, PDO
+- **Frontend:** HTML5, CSS3, vanilla JavaScript
+- **Local environment:** XAMPP, WAMP, LAMP, or PHP's built-in server
 
-## Folder Structure
+## Project Structure
 
-```
+```text
 virtual-travel-planner/
-├── index.php                     # Home page (Hero, About brief, Services overview, Reviews, CTAs)
-├── about.php                     # About page (Company story, fleet standards, core values)
-├── services.php                  # Detailed services (Local, Outstation, Airport, Corporate)
-├── contact.php                   # Contact page & Quote booking form with validation feedback
-├── submit_quote.php              # POST request handler with validation, prepared statements & PRG
-├── config/
-│   └── db.php                    # PDO connection manager & lightweight .env parser
-├── includes/
-│   ├── header.php                # Global header, meta tags, responsive navigation menu
-│   └── footer.php                # Global footer, contact info, Jaipur location, script links
 ├── assets/
-│   ├── css/
-│   │   └── style.css             # Responsive, mobile-first stylesheet (Blue/White/Grey theme)
-│   └── js/
-│       └── main.js               # Mobile navigation toggle & client-side validation
-├── sql/
-│   └── schema.sql                # MySQL database & table creation script
-├── tests/
-│   └── test_quote_submission.php # Automated test runner for validation & database security
-├── .env.example                  # Environment configuration template (DB credentials)
-├── spec.md                       # Project specification document
-└── README.md                     # Setup instructions and documentation
+│   ├── css/style.css
+│   ├── js/main.js
+│   └── images/
+│       ├── virtual-travel-planner-home.png
+│       ├── virtual-travel-planner-about.png
+│       ├── virtual-travel-planner-services.png
+│       └── virtual-travel-planner-contact.png
+├── config/db.php
+├── includes/
+│   ├── header.php
+│   └── footer.php
+├── sql/schema.sql
+├── tests/test_quote_submission.php
+├── about.php
+├── contact.php
+├── index.php
+├── services.php
+├── submit_quote.php
+├── .env.example
+└── README.md
 ```
 
----
+## Run Locally (XAMPP)
 
-## Setup & Installation (XAMPP / WAMP)
+### 1. Clone into the web root
 
-### 1. Place the Project in Web Server Directory
-Place this project inside your local web server root directory:
-- **XAMPP (Windows):** `C:\xampp\htdocs\virtual-travel-planner`
-- **WAMP (Windows):** `C:\wamp64\www\virtual-travel-planner`
-- **Linux/macOS:** `/var/www/html/virtual-travel-planner`
-
-### 2. Configure Environment (`.env`)
-Copy `.env.example` to create `.env`:
-```bash
-cp .env.example .env
+```powershell
+cd C:\xampp\htdocs
+git clone https://github.com/rahuldevligri/virtual-travel-planner.git
+cd virtual-travel-planner
 ```
-*(On Windows, you can also copy and rename the file using File Explorer).*
 
-Open `.env` and verify your database connection credentials. Default local XAMPP settings:
-```ini
+For WAMP, place the project under `C:\wamp64\www`.
+
+### 2. Configure environment variables
+
+Copy the example configuration to a local `.env` file:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Edit `.env` and set your local database values. Typical local XAMPP defaults are:
+
+```dotenv
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_NAME=virtual_travel_planner
 DB_USER=root
 DB_PASS=
 ```
-> **Note:** If `.env` is missing, `config/db.php` will fail gracefully with a descriptive error message guiding you to create `.env`.
 
-### 3. Start Apache & MySQL
-Open your XAMPP or WAMP Control Panel and start both **Apache** and **MySQL** services.
+Keep `.env` local. Do not commit database passwords or production credentials.
 
-### 4. Import the Database Schema
-You can import `sql/schema.sql` via **phpMyAdmin** or command line:
+### 3. Start Apache and MySQL
 
-#### Option A: Via phpMyAdmin
-1. Open `http://localhost/phpmyadmin` in your web browser.
-2. Click the **Import** tab.
-3. Choose the file `sql/schema.sql` located inside the project.
-4. Click **Go** / **Import**. This creates the `virtual_travel_planner` database and `quote_requests` table.
+Open the XAMPP Control Panel and start **Apache** and **MySQL**.
 
-#### Option B: Via Command Line (MySQL CLI)
+### 4. Import the database schema
+
+Import `sql/schema.sql` through phpMyAdmin, or run:
+
 ```bash
 mysql -u root -p < sql/schema.sql
 ```
-*(Press Enter if your root user has no password).*
 
-### 5. Access the Website
-Open your browser and navigate to:
-```
+### 5. Open the site
+
+Visit:
+
+```text
 http://localhost/virtual-travel-planner/
 ```
 
----
+## Run Tests
 
-## Running the Automated Test Suite
+A standalone test runner is included:
 
-A standalone test runner is located at `tests/test_quote_submission.php`.
-
-The test runner:
-1. Verifies that MySQL is reachable and the `quote_requests` table exists. If not, it displays:
-   `"Please start MySQL in XAMPP and import sql/schema.sql first."`
-2. Runs all 6 required test scenarios:
-   - **Test 1:** Valid data submission (row inserted in DB, returns row ID).
-   - **Test 2:** Empty name validation (returns "Full Name is required", no DB insert).
-   - **Test 3:** 5-digit phone validation (returns "Phone number must be exactly 10 digits", no DB insert).
-   - **Test 4:** Invalid email format validation (returns "Please enter a valid email address", no DB insert).
-   - **Test 5:** Disallowed service type / tampering check (returns allowlist error, no DB insert).
-   - **Test 6:** SQL injection attempt in name (safely parameterized through PDO; payload stored safely as literal text).
-
-### Run Tests via Command Line:
 ```bash
 php tests/test_quote_submission.php
 ```
 
-Or open in your browser:
-```
-http://localhost/virtual-travel-planner/tests/test_quote_submission.php
-```
+Start MySQL and import `sql/schema.sql` first. The test runner covers required-field validation, phone and email validation, allowed service types, valid request insertion, and parameterized input handling.
 
----
+## Security Notes
 
-## Key Features & Standards Followed
+- `config/db.php` reads database settings from `.env`.
+- Use PDO prepared statements for user-supplied SQL values.
+- Escape untrusted values rendered into HTML.
+- Keep `.env` out of version control; commit only `.env.example`.
+- Before production deployment, configure HTTPS, production environment variables, least-privilege database access, and safe server-side error handling.
 
-1. **Security & Injection Prevention:**
-   - All database queries strictly utilize PDO **prepared statements** with bound parameters to prevent SQL injection.
-   - All user inputs rendered in the DOM are sanitized using `htmlspecialchars(..., ENT_QUOTES, 'UTF-8')` to prevent Cross-Site Scripting (XSS).
-2. **Post-Redirect-Get (PRG) Pattern:**
-   - Form submissions to `submit_quote.php` redirect back to `contact.php` with session flash state (`$_SESSION['flash_success']`, `$_SESSION['flash_errors']`, `$_SESSION['old_input']`), preventing duplicate form resubmissions on browser refresh.
-3. **No Hardcoded Credentials:**
-   - Database credentials reside strictly in `.env`.
-4. **Mobile-First Responsive Design:**
-   - Pure vanilla CSS3 utilizing flexbox and CSS grid with smooth breakpoints for mobile, tablet, and desktop viewports.
-=======
-# Virtual Travel Planner 🚗
+## License
 
-A modern, responsive car rental website built using Core PHP, MySQL, and AI Harness (Gemini CLI). 
-
-## 🚀 Features
-- **Fully Responsive UI**: Looks perfect on Mobile, Tablet, and Desktop.
-- **Dynamic Services**: Cleanly structured arrays for Local, Outstation, Airport, and Corporate rentals.
-- **Secure Enquiry Form**: Built with PDO and Prepared Statements to prevent SQL Injection.
-- **Database Integration**: Stores customer quote requests securely in MySQL.
-- **Clean Architecture**: Follows PRG (Post-Redirect-Get) pattern and includes a `.env` setup for credentials.
-
-## 🛠️ Tech Stack
-- **Backend:** PHP (Core)
-- **Database:** MySQL (PDO)
-- **Frontend:** HTML5, CSS3, Vanilla JavaScript
-- **AI Tool Used:** Gemini CLI (for AI Harness assisted coding)
-
-## 📸 Screenshots
-![Home Page Preview](preview.png)
-*(Note: Make sure you have a `preview.png` file in your root folder)*
-
-## ⚙️ How to Run Locally
-1. Clone this repository inside your XAMPP `htdocs/Projects` folder.
-2. Start Apache and MySQL in XAMPP.
-3. Create a database named `virtual_travel_planner` in phpMyAdmin.
-4. Import the `sql/schema.sql` file.
-5. Rename `.env.example` to `.env` and update your database credentials.
-6. Open `http://localhost/Projects/virtual-travel-planner/` in your browser.
->>>>>>> d7632849af8eda0bd7340d570f9cae06d3074f8d
+No license file is currently included. Add a `LICENSE` file if you want to grant explicit permission for others to reuse, modify, or distribute the code.
